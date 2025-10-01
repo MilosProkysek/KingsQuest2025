@@ -9,9 +9,11 @@ namespace KingsQuest2025
             Console.WriteLine("Vitej statecny rytiri v hre Kraluv Ukol!\n");
 
             //Game init
-            Room currentRoom = new Room() { 
+            Room currentRoom = new Room()
+            {
                 Name = "Sal",
-                Description = "Prostorna mistnost, bohate zdobena zlatem."};
+                Description = "Prostorna mistnost, bohate zdobena zlatem."
+            };
 
             Room RoomZbrojnice = new Room()
             {
@@ -25,11 +27,18 @@ namespace KingsQuest2025
                 Description = "Draci sluj plna draka."
             };
 
-            currentRoom.Neigbours.Add(RoomZbrojnice);
-            currentRoom.Neigbours.Add(RoomDrak);
+            Character King = new Character()
+            {
+                Name = "Kral",
+                Description = "Stary moudry kral."
+            };
+            currentRoom.Characters.Add(King);
 
-            RoomZbrojnice.Neigbours.Add(currentRoom);
-            RoomDrak.Neigbours.Add(currentRoom);
+            currentRoom.Neighbours.Add(RoomZbrojnice);
+            currentRoom.Neighbours.Add(RoomDrak);
+
+            RoomZbrojnice.Neighbours.Add(currentRoom);
+            RoomDrak.Neighbours.Add(currentRoom);
 
             string userInputString;
             do
@@ -44,10 +53,23 @@ namespace KingsQuest2025
                 {
                     case "jdi":
                         Console.WriteLine($"Jdes do:{userInput[1]}");
-                        Room nextRoom = currentRoom.Neigbours.Find(r => r.Name.ToLower() == userInput[1]);
+                        Room nextRoom = currentRoom.Neighbours.Find(r => r.Name.ToLower() == userInput[1]);
                         if (nextRoom != null)
                         {
                             currentRoom = nextRoom;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tam jit nemuzes!");
+                        }
+
+                        break;
+                    case "mluv":
+                        Console.WriteLine($"Mluvis s do:{userInput[1]}");
+                        Character talkTo = currentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
+                        if (talkTo != null)
+                        {
+                            talkTo.Talk();
                         }
                         else
                         {

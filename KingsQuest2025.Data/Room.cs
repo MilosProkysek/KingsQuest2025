@@ -1,40 +1,54 @@
 ﻿namespace KingsQuest2025.Data
 {
-    public class Room
+    public class Room : GameObject
     {
-        public string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        private List<Room> _neigbours;
-        public List<Room> Neigbours
+        private List<Room> _neighbours;
+        public List<Room> Neighbours
         {
             get
             {
-                if (_neigbours == null)
+                if (_neighbours == null)
                 {
-                    _neigbours = new List<Room>();
+                    _neighbours = new List<Room>();
                 }
-                return _neigbours;
+                return _neighbours;
             }
-            set { _neigbours = value; }
+            set { _neighbours = value; }
         }
 
-        public string Description { get; set; }
+        private List<Character> _characters;
+        public List<Character> Characters
+        {
+            get
+            {
+                if (_characters == null)
+                {
+                    _characters = new List<Character>();
+                }
+                return _characters;
+            }
+            set { _characters = value; }
+        }
+
 
         public void Describe()
         {
             Console.WriteLine($"{Name}");
             Console.WriteLine($"{Description}");
-            Console.WriteLine("V sale jsou: Kral, Princezna");
+            Console.Write("V sale jsou: ");
+            PrintGameObjects(Characters);
+            Console.WriteLine();
             Console.WriteLine("V sale se nachazi: Trun");
-            Console.WriteLine("Odsud muzes jit do: ");
-            foreach (Room room in Neigbours)
+            Console.Write("Odsud muzes jit do: ");
+            PrintGameObjects(Neighbours);
+            Console.WriteLine();
+        }
+
+        private void PrintGameObjects(List<object> col)
+        {
+            foreach (IGameObject gameObject in col)
             {
-                Console.Write($"{room.Name},");
+                Console.Write($"{gameObject.Name},");
             }
         }
     }
