@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 
+using KingsQuest2025.Data;
+
 namespace KingsQuest2025.View
 {
     public class GameView

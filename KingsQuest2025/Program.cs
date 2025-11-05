@@ -1,4 +1,5 @@
 ﻿using KingsQuest2025.Data;
+using KingsQuest2025.GameService;
 
 namespace KingsQuest2025
 {
@@ -6,47 +7,22 @@ namespace KingsQuest2025
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Vitej statecny rytiri v hre Kraluv Ukol!\n");
+            //Game init
+            Game game = new Game();
+            GameService.GameService gameService = new GameService.GameService();
+            gameService.Init(game);
+
 
             //UI init
             View.GameView gameView = new View.GameView();
+            gameView.DisplayMessage("Vitej statecny rytiri v hre Kraluv Ukol!\n");
 
-            //Game init
-            Room currentRoom = new Room()
-            {
-                Name = "Sal",
-                Description = "Prostorna mistnost, bohate zdobena zlatem."
-            };
 
-            Room RoomZbrojnice = new Room()
-            {
-                Name = "Zbrojnice",
-                Description = "Velka tmava mistnost plna zelezneho harampadi."
-            };
-
-            Room RoomDrak = new Room()
-            {
-                Name = "Sluj",
-                Description = "Draci sluj plna draka."
-            };
-
-            Character King = new Character()
-            {
-                Name = "Kral",
-                Description = "Stary moudry kral."
-            };
-            currentRoom.Characters.Add(King);
-
-            currentRoom.Neighbours.Add(RoomZbrojnice);
-            currentRoom.Neighbours.Add(RoomDrak);
-
-            RoomZbrojnice.Neighbours.Add(currentRoom);
-            RoomDrak.Neighbours.Add(currentRoom);
 
             string userInputString;
             do
             {
-                currentRoom.Describe();
+                gameView.CurrentRoomInfo(game.CurrentRoom);
                 gameView.DisplayMessage("Co budes delat?:");
 
                 userInputString = Console.ReadLine() ?? "";
@@ -55,13 +31,9 @@ namespace KingsQuest2025
                 switch (userInput[0])
                 {
                     case "jdi":
-                        gameView.DisplayMessage($"Jdes do:{userInput[1]}");
-                        Room nextRoom = currentRoom.Neighbours.Find(r => r.Name.ToLower() == userInput[1]);
-                        if (nextRoom != null)
-                        {
-                            currentRoom = nextRoom;
-                        }
-                        else
+                        gameView.DisplayMessage($"Jdes do:{userInput[1]}");                        
+                        
+                        if (!gameService.ChangeRoom(userInput[1]))
                         {
                             gameView.DisplayMessage("Tam jit nemuzes!");
                         }
@@ -69,7 +41,7 @@ namespace KingsQuest2025
                         break;
                     case "mluv":
                         gameView.DisplayMessage($"Mluvis s:{userInput[1]}");
-                        Character talkTo = currentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
+                        Character talkTo = game.CurrentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
                         if (talkTo != null)
                         {
                             talkTo.Talk();

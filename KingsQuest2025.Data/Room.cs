@@ -29,28 +29,5 @@
             }
             set { _characters = value; }
         }
-
-
-        public void Describe()
-        {
-            Console.WriteLine($"{Name}");
-            Console.WriteLine($"{Description}");
-            Console.Write("V sale jsou: ");
-            PrintGameObjects(Characters);
-            Console.WriteLine();
-            Console.WriteLine("V sale se nachazi: Trun");
-            Console.Write("Odsud muzes jit do: ");
-            PrintGameObjects(Neighbours);
-            Console.WriteLine();
-        }
-
-
-        private void PrintGameObjects<T>(List<T> col) where T : IGameObject
-        {
-            foreach (T gameObject in col)                      
-            {
-                Console.Write($"{gameObject.Name},");
-            }
-        }
     }
 }
