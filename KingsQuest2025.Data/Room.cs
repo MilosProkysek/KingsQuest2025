@@ -44,9 +44,10 @@
             Console.WriteLine();
         }
 
-        private void PrintGameObjects(List<object> col)
+
+        private void PrintGameObjects<T>(List<T> col) where T : IGameObject
         {
-            foreach (IGameObject gameObject in col)
+            foreach (T gameObject in col)                      
             {
                 Console.Write($"{gameObject.Name},");
             }

@@ -8,6 +8,9 @@ namespace KingsQuest2025
         {
             Console.WriteLine("Vitej statecny rytiri v hre Kraluv Ukol!\n");
 
+            //UI init
+            View.GameView gameView = new View.GameView();
+
             //Game init
             Room currentRoom = new Room()
             {
@@ -44,7 +47,7 @@ namespace KingsQuest2025
             do
             {
                 currentRoom.Describe();
-                Console.Write("\nCo budes delat?: ");
+                gameView.DisplayMessage("Co budes delat?:");
 
                 userInputString = Console.ReadLine() ?? "";
                 string[] userInput = userInputString.ToLower().Split(' ');
@@ -52,7 +55,7 @@ namespace KingsQuest2025
                 switch (userInput[0])
                 {
                     case "jdi":
-                        Console.WriteLine($"Jdes do:{userInput[1]}");
+                        gameView.DisplayMessage($"Jdes do:{userInput[1]}");
                         Room nextRoom = currentRoom.Neighbours.Find(r => r.Name.ToLower() == userInput[1]);
                         if (nextRoom != null)
                         {
@@ -60,12 +63,12 @@ namespace KingsQuest2025
                         }
                         else
                         {
-                            Console.WriteLine("Tam jit nemuzes!");
+                            gameView.DisplayMessage("Tam jit nemuzes!");
                         }
 
                         break;
                     case "mluv":
-                        Console.WriteLine($"Mluvis s do:{userInput[1]}");
+                        gameView.DisplayMessage($"Mluvis s:{userInput[1]}");
                         Character talkTo = currentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
                         if (talkTo != null)
                         {
@@ -73,15 +76,15 @@ namespace KingsQuest2025
                         }
                         else
                         {
-                            Console.WriteLine("Tam jit nemuzes!");
+                            gameView.DisplayMessage("Tam jit nemuzes!");
                         }
 
                         break;
                     case "konec":
-                        Console.WriteLine("Sbohem statecny rytiri!");
+                        gameView.DisplayMessage("Sbohem statecny rytiri!");
                         break;
                     default:
-                        Console.WriteLine("Neznamy prikaz.");
+                        gameView.DisplayMessage("Neznamy prikaz.");
                         break;
                 }
             } while (userInputString != "konec");

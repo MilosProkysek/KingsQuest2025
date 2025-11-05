@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KingsQuest2025.Data\KingsQuest2025.Data.csproj" />
+    <ProjectReference Include="..\KingsQuest2025.View\KingsQuest2025.View.csproj" />
   </ItemGroup>
 
 </Project>
