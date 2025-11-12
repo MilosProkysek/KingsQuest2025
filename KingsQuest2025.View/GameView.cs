@@ -6,8 +6,9 @@ namespace KingsQuest2025.View
 {
     public class GameView
     {
-        public void DisplayMessage(string message)
+        public void DisplayMessage(string message_key)
         {
+            string message = global::KingsQuest2025.View.Lang.ResourceManager.GetString(message_key) ?? message_key;
             Console.WriteLine(message);
         }
 
@@ -22,6 +23,8 @@ namespace KingsQuest2025.View
             Console.Write("Odsud muzes jit do: ");
             PrintGameObjects(currentRoom.Neighbours);
             Console.WriteLine();
+            Console.Write("Muzes delat:");
+            Console.Write(Lang.CMD_GO + " <jmeno mistnosti> - jit do jine mistnosti, ");
         }
 
         private void PrintGameObjects<T>(List<T> col) where T : IGameObject
@@ -30,6 +33,11 @@ namespace KingsQuest2025.View
             {
                 Console.Write($"{gameObject.Name},");
             }
+        }
+
+        public string ReadUserInput()
+        {
+            return Console.ReadLine() ?? "";
         }
     }
 }

@@ -7,6 +7,10 @@ namespace KingsQuest2025
     {
         private static void Main(string[] args)
         {
+            //Lang init
+            //Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("cs-CZ");
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
             //Game init
             Game game = new Game();
             GameService.GameService gameService = new GameService.GameService();
@@ -15,7 +19,7 @@ namespace KingsQuest2025
 
             //UI init
             View.GameView gameView = new View.GameView();
-            gameView.DisplayMessage("Vitej statecny rytiri v hre Kraluv Ukol!\n");
+            gameView.DisplayMessage("msg_welcome");
 
 
 
@@ -25,12 +29,14 @@ namespace KingsQuest2025
                 gameView.CurrentRoomInfo(game.CurrentRoom);
                 gameView.DisplayMessage("Co budes delat?:");
 
-                userInputString = Console.ReadLine() ?? "";
+                userInputString = gameView.ReadUserInput();
                 string[] userInput = userInputString.ToLower().Split(' ');
+                string command = GetUserCommand(userInput[0]);
 
-                switch (userInput[0])
+
+                switch (command)
                 {
-                    case "jdi":
+                    case "CMD_GO":
                         gameView.DisplayMessage($"Jdes do:{userInput[1]}");                        
                         
                         if (!gameService.ChangeRoom(userInput[1]))
@@ -61,6 +67,22 @@ namespace KingsQuest2025
                 }
             } while (userInputString != "konec");
 
+        }
+
+        private static string GetUserCommand(string commandString)
+        {
+            //string localizedCommand = View.Lang.ResourceManager.GetString(commandString, new System.Globalization.CultureInfo("cs-CZ"));
+            var resourceSet = View.Lang.ResourceManager.GetResourceSet(
+        Thread.CurrentThread.CurrentUICulture, true, true);
+
+            foreach (System.Collections.DictionaryEntry entry in resourceSet)
+            {
+                if (entry.Value?.ToString() == commandString)
+                {
+                    return entry.Key.ToString();
+                }
+            }
+            return "";
         }
     }
 }
