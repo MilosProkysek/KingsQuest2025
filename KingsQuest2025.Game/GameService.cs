@@ -1,4 +1,5 @@
 ﻿using KingsQuest2025.Data;
+using System.Data;
 using System.Net.Http.Headers;
 
 namespace KingsQuest2025.GameService
@@ -14,6 +15,11 @@ namespace KingsQuest2025.GameService
     public class GameService
     {
         private Game game;
+
+        public Game GetGame()
+        {
+            return game;
+        }
 
         public bool ChangeRoom(string newRoomName)
         {
@@ -63,6 +69,44 @@ namespace KingsQuest2025.GameService
             roomDrak.Neighbours.Add(roomSal);
 
             game.CurrentRoom = roomSal;
+        }
+
+        public void DoCommand(COMMAND_TYPE command_type)
+        {
+            string[] userInput = { "xxx", "Zbrojnice" };
+            //command_type = gameView.ReadUserInput();
+
+            switch (command_type)
+            {
+                case COMMAND_TYPE.GO:
+                    //gameView.DisplayMessage($"Jdes do:{userInput[1]}");
+
+                    if (!this.ChangeRoom(userInput[1]))
+                    {
+                        //gameView.DisplayMessage("Tam jit nemuzes!");
+                    }
+
+                    break;
+                case COMMAND_TYPE.TALK:
+                    //gameView.DisplayMessage($"Mluvis s:{userInput[1]}");
+                    Character talkTo = game.CurrentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
+                    if (talkTo != null)
+                    {
+                        talkTo.Talk();
+                    }
+                    else
+                    {
+                        //gameView.DisplayMessage("Tam jit nemuzes!");
+                    }
+
+                    break;
+                case COMMAND_TYPE.EXIT:
+                    //gameView.DisplayMessage("Sbohem statecny rytiri!");
+                    break;
+                default:
+                    //gameView.DisplayMessage("Neznamy prikaz.");
+                    break;
+            }
         }
     }
 }

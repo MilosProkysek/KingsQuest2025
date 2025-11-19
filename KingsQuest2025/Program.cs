@@ -1,5 +1,6 @@
 ﻿using KingsQuest2025.Data;
 using KingsQuest2025.GameService;
+using KingsQuest2025.Controller;
 using System.Data;
 
 namespace KingsQuest2025
@@ -19,58 +20,29 @@ namespace KingsQuest2025
 
 
             //UI init
-            View.GameView gameView = new View.GameView();
-            gameView.DisplayMessage("msg_welcome");
+            //View.GameView gameView = new View.GameView();
+            //gameView.DisplayMessage("msg_welcome");
+            GameController gameController = new GameController(gameService);
+            gameController.Show();
 
+            //string userInputString;
+            //COMMAND_TYPE command_type = COMMAND_TYPE.UNKNOWN;
+            //do
+            //{
+            //    gameView.CurrentRoomInfo(game.CurrentRoom);
+            //    gameView.DisplayMessage("Co budes delat?:");
 
+            //    //userInputString = gameView.ReadUserInput();
+            //    //string[] userInput = userInputString.ToLower().Split(' ');
+            //    //string command = GetUserCommand(userInput[0]);
 
-            string userInputString;
-            COMMAND_TYPE command_type = COMMAND_TYPE.UNKNOWN;
-            do
-            {
-                gameView.CurrentRoomInfo(game.CurrentRoom);
-                gameView.DisplayMessage("Co budes delat?:");
+            //    string[] userInput = {"xxx","ZbrojniXX" };
 
-                //userInputString = gameView.ReadUserInput();
-                //string[] userInput = userInputString.ToLower().Split(' ');
-                //string command = GetUserCommand(userInput[0]);
+            //    command_type = gameView.ReadUserInput();
+            //    gameService.DoCommand(command_type);
 
-                string[] userInput = {"xxx","ZbrojniXX" };
-
-                command_type = gameView.ReadUserInput();                   
-
-                switch (command_type)
-                {
-                    case COMMAND_TYPE.GO:
-                        gameView.DisplayMessage($"Jdes do:{userInput[1]}");                        
-                        
-                        if (!gameService.ChangeRoom(userInput[1]))
-                        {
-                            gameView.DisplayMessage("Tam jit nemuzes!");
-                        }
-
-                        break;
-                    case COMMAND_TYPE.TALK:
-                        gameView.DisplayMessage($"Mluvis s:{userInput[1]}");
-                        Character talkTo = game.CurrentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
-                        if (talkTo != null)
-                        {
-                            talkTo.Talk();
-                        }
-                        else
-                        {
-                            gameView.DisplayMessage("Tam jit nemuzes!");
-                        }
-
-                        break;
-                    case COMMAND_TYPE.EXIT:
-                        gameView.DisplayMessage("Sbohem statecny rytiri!");
-                        break;
-                    default:
-                        gameView.DisplayMessage("Neznamy prikaz.");
-                        break;
-                }
-            } while (command_type != COMMAND_TYPE.EXIT);
+                
+            //} while (command_type != COMMAND_TYPE.EXIT);
 
         }
 

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingsQuest2025.View", "King
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingsQuest2025.GameService", "KingsQuest2025.Game\KingsQuest2025.GameService.csproj", "{CE75D152-8BB9-4C81-A49D-D343EB5B583C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingsQuest2025.Controller", "KingsQuest2025.Controller\KingsQuest2025.Controller.csproj", "{D8D6A16D-BB98-4BA9-82C7-829D4A968811}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CE75D152-8BB9-4C81-A49D-D343EB5B583C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE75D152-8BB9-4C81-A49D-D343EB5B583C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE75D152-8BB9-4C81-A49D-D343EB5B583C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D6A16D-BB98-4BA9-82C7-829D4A968811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D6A16D-BB98-4BA9-82C7-829D4A968811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D6A16D-BB98-4BA9-82C7-829D4A968811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D6A16D-BB98-4BA9-82C7-829D4A968811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KingsQuest2025.Controller\KingsQuest2025.Controller.csproj" />
-    <ProjectReference Include="..\KingsQuest2025.Data\KingsQuest2025.Data.csproj" />
     <ProjectReference Include="..\KingsQuest2025.Game\KingsQuest2025.GameService.csproj" />
     <ProjectReference Include="..\KingsQuest2025.View\KingsQuest2025.View.csproj" />
   </ItemGroup>
