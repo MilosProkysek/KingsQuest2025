@@ -3,14 +3,22 @@ using System.Net.Http.Headers;
 
 namespace KingsQuest2025.GameService
 {
+    public enum COMMAND_TYPE
+    {
+        GO,
+        TALK,
+        EXIT,
+        UNKNOWN
+    }
+
     public class GameService
     {
         private Game game;
 
         public bool ChangeRoom(string newRoomName)
         {
-            Room nextRoom = game.CurrentRoom.Neighbours.Find(r => r.Name.ToLower() == newRoomName);
-            if(newRoomName == null)
+            Room nextRoom = game.CurrentRoom.Neighbours.Find(r => r.Name.ToLower() == newRoomName.ToLower());
+            if (nextRoom == null)
             {
                 return false;
             }

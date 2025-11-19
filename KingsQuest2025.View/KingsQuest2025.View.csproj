@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KingsQuest2025.Data\KingsQuest2025.Data.csproj" />
+    <ProjectReference Include="..\KingsQuest2025.Game\KingsQuest2025.GameService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

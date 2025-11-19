@@ -1,5 +1,6 @@
 ﻿using KingsQuest2025.Data;
 using KingsQuest2025.GameService;
+using System.Data;
 
 namespace KingsQuest2025
 {
@@ -24,19 +25,23 @@ namespace KingsQuest2025
 
 
             string userInputString;
+            COMMAND_TYPE command_type = COMMAND_TYPE.UNKNOWN;
             do
             {
                 gameView.CurrentRoomInfo(game.CurrentRoom);
                 gameView.DisplayMessage("Co budes delat?:");
 
-                userInputString = gameView.ReadUserInput();
-                string[] userInput = userInputString.ToLower().Split(' ');
-                string command = GetUserCommand(userInput[0]);
+                //userInputString = gameView.ReadUserInput();
+                //string[] userInput = userInputString.ToLower().Split(' ');
+                //string command = GetUserCommand(userInput[0]);
 
+                string[] userInput = {"xxx","ZbrojniXX" };
 
-                switch (command)
+                command_type = gameView.ReadUserInput();                   
+
+                switch (command_type)
                 {
-                    case "CMD_GO":
+                    case COMMAND_TYPE.GO:
                         gameView.DisplayMessage($"Jdes do:{userInput[1]}");                        
                         
                         if (!gameService.ChangeRoom(userInput[1]))
@@ -45,7 +50,7 @@ namespace KingsQuest2025
                         }
 
                         break;
-                    case "mluv":
+                    case COMMAND_TYPE.TALK:
                         gameView.DisplayMessage($"Mluvis s:{userInput[1]}");
                         Character talkTo = game.CurrentRoom.Characters.Find(c => c.Name.ToLower() == userInput[1]);
                         if (talkTo != null)
@@ -58,31 +63,16 @@ namespace KingsQuest2025
                         }
 
                         break;
-                    case "konec":
+                    case COMMAND_TYPE.EXIT:
                         gameView.DisplayMessage("Sbohem statecny rytiri!");
                         break;
                     default:
                         gameView.DisplayMessage("Neznamy prikaz.");
                         break;
                 }
-            } while (userInputString != "konec");
+            } while (command_type != COMMAND_TYPE.EXIT);
 
         }
 
-        private static string GetUserCommand(string commandString)
-        {
-            //string localizedCommand = View.Lang.ResourceManager.GetString(commandString, new System.Globalization.CultureInfo("cs-CZ"));
-            var resourceSet = View.Lang.ResourceManager.GetResourceSet(
-        Thread.CurrentThread.CurrentUICulture, true, true);
-
-            foreach (System.Collections.DictionaryEntry entry in resourceSet)
-            {
-                if (entry.Value?.ToString() == commandString)
-                {
-                    return entry.Key.ToString();
-                }
-            }
-            return "";
-        }
     }
 }
