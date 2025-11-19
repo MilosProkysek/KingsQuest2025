@@ -20,30 +20,9 @@ namespace KingsQuest2025
 
 
             //UI init
-            //View.GameView gameView = new View.GameView();
-            //gameView.DisplayMessage("msg_welcome");
             GameController gameController = new GameController(gameService);
             gameController.Show();
-
-            //string userInputString;
-            //COMMAND_TYPE command_type = COMMAND_TYPE.UNKNOWN;
-            //do
-            //{
-            //    gameView.CurrentRoomInfo(game.CurrentRoom);
-            //    gameView.DisplayMessage("Co budes delat?:");
-
-            //    //userInputString = gameView.ReadUserInput();
-            //    //string[] userInput = userInputString.ToLower().Split(' ');
-            //    //string command = GetUserCommand(userInput[0]);
-
-            //    string[] userInput = {"xxx","ZbrojniXX" };
-
-            //    command_type = gameView.ReadUserInput();
-            //    gameService.DoCommand(command_type);
-
-                
-            //} while (command_type != COMMAND_TYPE.EXIT);
-
+          
         }
 
     }

@@ -71,9 +71,9 @@ namespace KingsQuest2025.GameService
             game.CurrentRoom = roomSal;
         }
 
-        public void DoCommand(COMMAND_TYPE command_type)
+        public void DoCommand(COMMAND_TYPE command_type, object[] commandObjects)
         {
-            string[] userInput = { "xxx", "Zbrojnice" };
+            //string[] userInput = { "xxx", "Zbrojnice" };
             //command_type = gameView.ReadUserInput();
 
             switch (command_type)
@@ -81,7 +81,8 @@ namespace KingsQuest2025.GameService
                 case COMMAND_TYPE.GO:
                     //gameView.DisplayMessage($"Jdes do:{userInput[1]}");
 
-                    if (!this.ChangeRoom(userInput[1]))
+                    // [to do]
+                    //if (!this.ChangeRoom(userInput[1]))
                     {
                         //gameView.DisplayMessage("Tam jit nemuzes!");
                     }

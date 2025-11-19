@@ -37,44 +37,13 @@ namespace KingsQuest2025.View
             }
         }
 
-        public COMMAND_TYPE ReadUserInput()
+        public string ReadUserInput()
         {
             string userInputString = Console.ReadLine() ?? "";
-            string[] userInput = userInputString.ToLower().Split(' ');
-            COMMAND_TYPE command = GetUserCommand(userInput[0]);
-
-            //[to do]
-            return command;
+            return userInputString;
         }
 
-        private static COMMAND_TYPE GetUserCommand(string commandString)
-        {
-            //string localizedCommand = View.Lang.ResourceManager.GetString(commandString, new System.Globalization.CultureInfo("cs-CZ"));
-            var resourceSet = View.Lang.ResourceManager.GetResourceSet(
-        Thread.CurrentThread.CurrentUICulture, true, true);
-
-            string commandName = "";
-
-            foreach (System.Collections.DictionaryEntry entry in resourceSet)
-            {
-                if (entry.Value?.ToString() == commandString)
-                {
-                    commandName = entry.Key.ToString();
-                }
-            }
-
-            switch (commandName)
-            {
-                case "CMD_GO":
-                    return COMMAND_TYPE.GO;
-                case "CMD_TALK":
-                    return COMMAND_TYPE.TALK;
-                case "CMD_EXIT":
-                    return COMMAND_TYPE.EXIT;
-                default:
-                    return COMMAND_TYPE.UNKNOWN;
-            }
-        }
+      
 
     }
 }
